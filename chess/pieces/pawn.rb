@@ -17,8 +17,13 @@ class Pawn < Piece
 
         if forward_dir == 1
             if self.at_start_row?
-                poss_moves << x + 2, y if self.board[[x+2,y]].color == 'gray' && self.board[[x+1,y]].color == 'gray'
+                poss_moves << [x+2, y] if self.board[[x+2,y]].color == 'gray' && self.board[[x+1,y]].color == 'gray'
             end
+            return [] if x == 0 || x == 7
+                
+            poss_moves << [x+1, y] if self.board[[x+1,y]].color == 'gray'
+            poss_moves << [x+1, y+1] if self.board[[x+1,y]].color != 'gray' && self.board[[x+1,y]].color != self.color
+            poss_moves << [x+1, y-1] if self.board[[x+1,y]].color != 'gray' && self.board[[x+1,y]].color != self.color
         end
     end
 
