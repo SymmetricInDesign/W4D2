@@ -4,8 +4,15 @@ require "singleton"
 class NullPiece < Piece
     include Singleton
 
-    def initialize(color, board, pos)
-        super
+    def initialize
+        @color = 'gray'
+    end
+
+    def empty?
+        true
     end
     
+    def symbol
+        :X 
+    end 
 end

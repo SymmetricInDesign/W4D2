@@ -19,6 +19,11 @@ class King < Piece
     end
 
     def symbol
-        :King
+        :K
     end
+
+    def move_diffs  
+        return [[1, 1], [1, -1], [-1, 1], [-1, -1], [0, 1], [0, -1], [1, 0], [-1, 0]]
+    end
+
 end

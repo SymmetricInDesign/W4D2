@@ -34,7 +34,17 @@ module Slideable
         while true
             x+=dx
             y+=dy
+
             break if !x.between?(0,7) || !y.between?(0,7)
+            
+            if self.board[[x,y]].color == self.color
+                break
+            elsif self.board[[x,y]].color != self.color && self.board[[x,y]].color != 'gray'
+                arr << [x,y]
+                break
+            end
+
+            
             arr << [x,y]
         end
         arr

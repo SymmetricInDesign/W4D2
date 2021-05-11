@@ -19,7 +19,12 @@ class Knight < Piece
     end
 
     def symbol
-        :Knight
+        :T
     end
     
+    def move_diffs
+        return [[1, 2], [1, -2], [-1, 2], [-1, -2], [2, 1], [2, -1], [-2, 1], [-2, -1]]
+    end
+
+
 end

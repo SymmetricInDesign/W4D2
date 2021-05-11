@@ -1,11 +1,12 @@
 require_relative "piece"
 require_relative "./pieces/knight"
 require_relative "./pieces/queen"
-
+require_relative "./pieces/nullpiece.rb"
 class Board
 
     def initialize()
-        @grid = Array.new(8){Array.new(8)}
+        null_piece = NullPiece.instance
+        @grid = Array.new(8){ Array.new(8, null_piece) }
 
     end
 
@@ -44,15 +45,15 @@ end
 board = Board.new
 # p board
 
-queen = Queen.new("black", board, [3,3])
+# queen = Queen.new("black", board, [3,3])
 # knight2 = Knight.new("black", board, [6,6])
 
-board.add_piece(queen, queen.pos)
+# board.add_piece(queen, queen.pos)
 # board.add_piece(knight2, knight2.pos)
-p queen.moves
+# p queen.moves
 board.render
 puts "====================="
 
-board.move_piece([3,3], [4,4])
+# board.move_piece([3,3], [4,4])
 
-board.render
+# board.render
