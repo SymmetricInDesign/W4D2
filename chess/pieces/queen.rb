@@ -1,5 +1,8 @@
 require_relative "../piece"
 
-class Queen
+class Queen < Piece
 
+    def initialize(color, board, pos)
+        super
+    end
 end

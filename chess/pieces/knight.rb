@@ -1,7 +1,7 @@
 require_relative "../piece"
-require "./steppable"
+# require "./steppable"
 
-class Knight
+class Knight < Piece
     ROW = [1, 1,-1,-1, 2, 2,-2,-2]
     COL = [2,-2, 2,-2, 1,-1, 1,-1]
 
@@ -10,13 +10,16 @@ class Knight
     end
 
     def valid_moves
-        x, y = @pos
-
-        arr << move if super(move)
+        x,y = @pos
+        moves = []
+        (0..7).each do |i|
+            moves << [x+ROW[i], y+COL[i]]
+        end
+        moves.select {|move| super(move)}
     end
 
     def symbol
-        :K
+        :Knight
     end
     
 end
