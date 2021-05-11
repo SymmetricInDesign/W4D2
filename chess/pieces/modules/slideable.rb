@@ -9,9 +9,9 @@ module Slideable
         dirs = self.move_dirs
         dirs.each do |dir|
             i,j = dir
-
+            possible_moves += grow_unblocked_moves_in_dir(i,j)
         end
-
+        possible_moves
     end
 
     def diag
@@ -30,8 +30,14 @@ module Slideable
         x,y = self.pos
 
         arr = []
-        
-
+        #[1,1][1,2][1,3]
+        while true
+            x+=dx
+            y+=dy
+            break if !x.between?(0,7) || !y.between?(0,7)
+            arr << [x,y]
+        end
+        arr
     end
 
 end

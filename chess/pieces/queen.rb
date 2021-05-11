@@ -1,7 +1,8 @@
 require_relative "../piece"
+require_relative "./modules/slideable.rb"
 
 class Queen < Piece
-
+    include Slideable
     def initialize(color, board, pos)
         super
     end
@@ -11,4 +12,9 @@ class Queen < Piece
         self.diag + self.horizontal
     end
 
+    def valid_moves
+
+    end
+
 end
+
