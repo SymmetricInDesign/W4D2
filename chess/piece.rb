@@ -8,4 +8,9 @@ class Piece
     def to_s
         "p"
     end
+
+    valid_moves(pos)
+        
+    end
+
 end
