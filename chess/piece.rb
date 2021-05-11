@@ -1,4 +1,7 @@
 class Piece
+
+    attr_accessor :pos
+
     def initialize(color, board, pos)
         @color = color
         @board = board
@@ -9,8 +12,10 @@ class Piece
         "p"
     end
 
-    valid_moves(pos)
+
+    def valid_moves(pos)
         
     end
+
 
 end

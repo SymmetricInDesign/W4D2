@@ -10,7 +10,7 @@ class Knight
     end
 
     def valid_moves
-        arr = []
+        x, y = @pos
 
         arr << move if super(move)
     end
