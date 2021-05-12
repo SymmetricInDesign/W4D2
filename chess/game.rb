@@ -16,6 +16,7 @@ class Game
     def play
         while !@board.checkmate?(@current_player.color)
             begin
+                # @display.render
                 @current_player.make_move(@board)
             rescue CheckError
                 puts "Invalid move; would leave king in check"
@@ -29,7 +30,7 @@ class Game
             end
             swap_turn
         end
-        p "Game over"
+        p "Game over. #{@current_player} loses!"
     end
 
 

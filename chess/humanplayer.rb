@@ -8,8 +8,8 @@ class HumanPlayer < Player
     def make_move(board)
         positions=[]
         # p self
-        @display.render
         @display.selected = false
+        @display.render
         while true      
             pos = @display.cursor.get_input
             if pos

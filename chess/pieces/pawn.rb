@@ -1,9 +1,6 @@
 require_relative "../piece"
 
 class Pawn < Piece
-    
-    attr_reader :dir
-
     def initialize(color, board, pos)
         super
         pos[0] == 1 ? @dir = 1 : @dir = -1
@@ -28,16 +25,7 @@ class Pawn < Piece
         rescue NoMethodError
             
         end
-        # else
-        #     if at_start_row?
-        #         poss_moves << [x-2*, y] if self.board[[x-2,y]].color == 'gray' && self.board[[x-1,y]].color == 'gray'
-        #     end
-        #     return [] if x == 0 || x == 7
-                
-        #     poss_moves << [x-1, y] if self.board[[x-1,y]].color == 'gray'
-        #     poss_moves << [x-1, y+1] if self.board[[x-1,y+1]].color != 'gray' && self.board[[x-1,y+1]].color != self.color
-        #     poss_moves << [x-1, y-1] if self.board[[x-1,y-1]].color != 'gray' && self.board[[x-1,y-1]].color != self.color
-        # end
+
         poss_moves
     end
     
@@ -46,7 +34,7 @@ class Pawn < Piece
     end
     private
 
-    attr_reader :forward_dir
+    attr_reader :dir
 
     def at_start_row?
         if @pos[0] == 1 && dir == 1

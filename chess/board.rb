@@ -1,11 +1,4 @@
-require_relative "piece"
-require_relative "./pieces/knight"
-require_relative "./pieces/rook"
-require_relative "./pieces/queen"
-require_relative "./pieces/king"
-require_relative "./pieces/bishop"
-require_relative "./pieces/nullpiece.rb"
-require_relative "./pieces/pawn.rb"
+require_relative "pieces"
 class Board
 
     attr_accessor :grid
@@ -53,7 +46,7 @@ class Board
                 if piece.is_a?(King)
                     piece.color == "black" ? @black_king_pos = end_pos : @white_king_pos = end_pos
                 end
-                puts "moved from #{start_pos} to #{end_pos}"
+                # puts "moved from #{start_pos} to #{end_pos}"
                 piece.pos = end_pos 
                 self[end_pos] = piece
                 self[start_pos] = NullPiece.instance
@@ -143,38 +136,3 @@ end
 
 class WrongPieceError < StandardError
 end
-
-p board = Board.new
-p board2 = board.deep_dup
-
-p board2[[1,5]].valid_moves   
-
-# puts "============================="
-
-# p board.deep_dup[[0,0]].object_id
-
-
-# queen = Queen.new("white", board, [3,3])
-
-
-# knight1 = Knight.new("black", board, [6,6])
-# knight2 = Knight.new("white", board, [6,7])
-
-# board.add_piece(queen, queen.pos)
-# board.add_piece(knight1, knight1.pos)
-# board.add_piece(knight2, knight2.pos)
-# p queen.moves
-
-# board.move_piece([1,3], [3,3])
-# board.move_piece([6,7], [5,7])
-# board.move_piece([0,2], [5,7])
-# board.move_piece([5,7], [0,2])
-
-# board.move_piece([0,3], [2,3])
-# board.move_piece([7,7], [2,7])
-
-# board.move_piece([1,6], [2,7])
-# board.move_piece([0,4], [1,3])
-
-
-# board.render
