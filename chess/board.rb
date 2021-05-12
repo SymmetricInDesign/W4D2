@@ -7,7 +7,7 @@ require_relative "./pieces/bishop"
 require_relative "./pieces/nullpiece.rb"
 require_relative "./pieces/pawn.rb"
 class Board
-
+    attr_accessor :grid
     def initialize()
         null_piece = NullPiece.instance
         @grid = Array.new(8){ Array.new(8, null_piece) }
