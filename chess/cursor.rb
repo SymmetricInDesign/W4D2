@@ -91,6 +91,9 @@ class Cursor
     when :up 
       update_pos(MOVES[:up])
       return nil
+    # when :backspace
+
+    #   return 
     when :ctrl_c
       Process.exit(0)
     end

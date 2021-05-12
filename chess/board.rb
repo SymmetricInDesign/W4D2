@@ -14,6 +14,8 @@ class Board
         @grid = Array.new(8){ Array.new(8, null_piece) }
         self.build_pawn_rows
         self.build_back_rows
+        @black_king_pos = [0,4]
+        @white_king_pos = [7,4]
 
         # self.render
     end
@@ -43,11 +45,13 @@ class Board
     end
 
     def move_piece(start_pos, end_pos)
-
         # debugger
         piece = self[start_pos]
         raise "no piece at position" if piece == NullPiece.instance
         if piece.moves.include?(end_pos)
+            if piece.is_a?(King)
+                piece.color == "black" ? @black_king_pos = end_pos : @white_king_pos = end_pos
+            end
             puts "moved from #{start_pos} to #{end_pos}"
             piece.pos = end_pos 
             self[end_pos] = piece
@@ -66,24 +70,63 @@ class Board
         @grid[x][y] = value
     end
 
-    # def render
-    #     puts "  #{(0..7).to_a.join(" ")}"
-    #     @grid.each_with_index do |row, index|
-    #         str = "#{index}"
-    #         row.each do |piece|
-    #             str += " #{piece.symbol}"
-    #         end
-    #         puts str
-    #     end
-    #     puts "================="
-    # end
+    def in_check?(color)
+        king_pos = color == "black" ? @black_king_pos : @white_king_pos
+        @grid.each do |row|
+            row.each do |piece|
+                next if piece.color == color
+                return true if piece.moves.include?(king_pos)
+            end
+        end
+        false
+    end
+
+    def checkmate?(color)
+        @grid.each do |row|
+            row.each do |piece|
+                if piece.color == color
+                    return false if !piece.valid_moves.empty?
+                end
+            end
+        end
+        true
+    end
+
+    def deep_dup
+        duped_board = self.dup
+        new_grid = []
+        @grid.each do |row|
+            subbarr = []
+            row.each do |piece|
+                if !piece.is_a?(NullPiece)
+                    new_piece = piece.dup
+                    new_piece.board = duped_board
+                    subbarr << new_piece
+                else
+                    subbarr << piece
+                end
+            end
+            new_grid << subbarr
+        end
+
+
+        duped_board.grid = new_grid
+        duped_board
+    end
 
 end
 
-board = Board.new
-# p board
+# board = Board.new
+# p board[[0,0]].object_id
 
-queen = Queen.new("white", board, [3,3])
+# puts "============================="
+
+# p board.deep_dup[[0,0]].object_id
+
+
+# queen = Queen.new("white", board, [3,3])
+
+
 # knight1 = Knight.new("black", board, [6,6])
 # knight2 = Knight.new("white", board, [6,7])
 
