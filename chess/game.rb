@@ -15,17 +15,17 @@ class Game
 
     def play
         while !@board.checkmate?(@current_player.color)
+            notify_players("#{@current_player.color} to move.")
             begin
-                # @display.render
                 @current_player.make_move(@board)
             rescue CheckError
-                puts "Invalid move; would leave king in check"
+                notify_players("Invalid move; would leave king in check")
                 retry
             rescue MoveError
-                puts "impossible move"
+                notify_players("impossible move")
                 retry
             rescue WrongPieceError
-                puts "This is not your piece"
+                notify_players("This is not your piece")
                 retry
             end
             swap_turn
@@ -36,8 +36,12 @@ class Game
 
     private
     
-    def notify_players
-
+    def notify_players(message)
+        if @display.message
+            @display.message += " #{message}"
+        else
+            @display.message = message
+        end
     end
 
     def swap_turn
