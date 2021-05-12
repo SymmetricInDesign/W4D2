@@ -16,7 +16,7 @@ class Pawn < Piece
         x,y = self.pos
 
         if forward_dir == 1
-            if self.at_start_row?
+            if at_start_row?
                 poss_moves << [x+2, y] if self.board[[x+2,y]].color == 'gray' && self.board[[x+1,y]].color == 'gray'
             end
             return [] if x == 0 || x == 7
@@ -24,9 +24,24 @@ class Pawn < Piece
             poss_moves << [x+1, y] if self.board[[x+1,y]].color == 'gray'
             poss_moves << [x+1, y+1] if self.board[[x+1,y]].color != 'gray' && self.board[[x+1,y]].color != self.color
             poss_moves << [x+1, y-1] if self.board[[x+1,y]].color != 'gray' && self.board[[x+1,y]].color != self.color
+            p poss_moves
+        else
+            if at_start_row?
+                poss_moves << [x-2, y] if self.board[[x-2,y]].color == 'gray' && self.board[[x-1,y]].color == 'gray'
+            end
+            return [] if x == 0 || x == 7
+                
+            poss_moves << [x-1, y] if self.board[[x-1,y]].color == 'gray'
+            poss_moves << [x-1, y+1] if self.board[[x-1,y]].color != 'gray' && self.board[[x-1,y]].color != self.color
+            poss_moves << [x-1, y-1] if self.board[[x-1,y]].color != 'gray' && self.board[[x-1,y]].color != self.color
+            p poss_moves
         end
+        poss_moves
     end
-
+    
+    def symbol
+        @color == "black" ? "♙" : "♟︎"
+    end
     private
 
     attr_reader :forward_dir
@@ -40,5 +55,7 @@ class Pawn < Piece
             false
         end
     end
+
+
     
 end

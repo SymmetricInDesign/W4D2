@@ -9,4 +9,8 @@ class Bishop < Piece
     def move_dirs
         self.diag
     end
+
+    def symbol
+        @color == "white" ? "♝" : "♗"
+    end
 end

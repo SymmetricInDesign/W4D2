@@ -13,6 +13,6 @@ class NullPiece < Piece
     end
     
     def symbol
-        :X 
+        "🨆" 
     end 
 end

@@ -9,4 +9,8 @@ class Rook < Piece
     def move_dirs
         self.horizontal
     end
+
+    def symbol
+        @color == "white" ? "♜" : "♖"
+    end
 end

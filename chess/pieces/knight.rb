@@ -1,7 +1,8 @@
 require_relative "../piece"
-# require "./steppable"
+require_relative "./modules/steppable"
 
 class Knight < Piece
+    include Steppable
     ROW = [1, 1,-1,-1, 2, 2,-2,-2]
     COL = [2,-2, 2,-2, 1,-1, 1,-1]
 
@@ -19,7 +20,7 @@ class Knight < Piece
     end
 
     def symbol
-        :T
+        @color == "white" ? "♞" : "♘"
     end
     
     def move_diffs
