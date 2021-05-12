@@ -76,8 +76,6 @@ class Cursor
   end
 
   def handle_key(key)
-    diff = []
-
     case key
     when :return, :space
       return @cursor_pos
