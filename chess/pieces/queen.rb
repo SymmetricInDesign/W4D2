@@ -12,10 +12,6 @@ class Queen < Piece
         self.diag + self.horizontal
     end
 
-    def valid_moves
-
-    end
-
     def symbol
         @color == "white" ? "♛" : "♕"
     end

@@ -19,12 +19,13 @@ class Piece
     def valid_moves
         valid = []
         moves = self.moves
-        debugger
+        # debugger
         moves.each do |move|
             duped_board = board.deep_dup
-            duped_board.move_piece(self.pos, move)
+            duped_board.move_piece!(self.color, self.pos, move)
             valid << move if !duped_board.in_check?(self.color)
         end
+        valid
     end
 
 

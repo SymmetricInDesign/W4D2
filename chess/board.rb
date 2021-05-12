@@ -44,15 +44,35 @@ class Board
         self[pos] = piece
     end
 
-    def move_piece(start_pos, end_pos)
+    def move_piece(player_color, start_pos, end_pos)
         # debugger
         piece = self[start_pos]
-        raise "no piece at position" if piece == NullPiece.instance
-        if piece.valid_moves.include?(end_pos)
+        raise WrongPieceError.new if piece.color != player_color 
+        if piece.moves.include?(end_pos)
+            if piece.valid_moves.include?(end_pos)
+                if piece.is_a?(King)
+                    piece.color == "black" ? @black_king_pos = end_pos : @white_king_pos = end_pos
+                end
+                puts "moved from #{start_pos} to #{end_pos}"
+                piece.pos = end_pos 
+                self[end_pos] = piece
+                self[start_pos] = NullPiece.instance
+            else
+                raise CheckError.new
+            end
+        else
+            raise MoveError.new
+        end
+    end
+
+    def move_piece!(player_color, start_pos, end_pos)
+        piece = self[start_pos]
+        raise WrongPieceError.new if piece.color != player_color 
+        if piece.moves.include?(end_pos)
             if piece.is_a?(King)
                 piece.color == "black" ? @black_king_pos = end_pos : @white_king_pos = end_pos
             end
-            puts "moved from #{start_pos} to #{end_pos}"
+            # puts "moved from #{start_pos} to #{end_pos}"
             piece.pos = end_pos 
             self[end_pos] = piece
             self[start_pos] = NullPiece.instance
@@ -73,7 +93,7 @@ class Board
         king_pos = color == "black" ? @black_king_pos : @white_king_pos
         @grid.each do |row|
             row.each do |piece|
-                next if piece.color == color
+                next if piece.color == color || piece.color == "gray"
                 return true if piece.moves.include?(king_pos)
             end
         end
@@ -113,6 +133,15 @@ class Board
         duped_board
     end
 
+end
+
+class CheckError < StandardError
+end
+
+class MoveError < StandardError
+end
+
+class WrongPieceError < StandardError
 end
 
 p board = Board.new
