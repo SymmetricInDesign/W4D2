@@ -1,3 +1,5 @@
+require "byebug"
+
 class Piece
 
     attr_accessor :pos, :board
@@ -15,11 +17,13 @@ class Piece
 
 
     def valid_moves
+        valid = []
         moves = self.moves
-        moves.select do |move|
+        debugger
+        moves.each do |move|
             duped_board = board.deep_dup
             duped_board.move_piece(self.pos, move)
-            !duped_board.in_check?(self.color)
+            valid << move if !duped_board.in_check?(self.color)
         end
     end
 

@@ -29,9 +29,11 @@ class Display
         puts "================="
     end
 
-    def display_loop
+    def display_loop  
+        @selected = false
         positions = []
-        while true
+        self.render
+        while true      
             pos = @cursor.get_input
             if pos
                 positions << pos 
@@ -42,6 +44,14 @@ class Display
             end
             self.render
         end
+    end
+
+    def game_loop
+        while true
+            start_pos, end_pos = self.display_loop
+            @board.move_piece(start_pos, end_pos)
+        end
+
     end
 
     def toggle_selected
@@ -55,5 +65,5 @@ end
 board = Board.new
 game1 = Display.new(board)
 game1.render
-p game1.display_loop
+game1.game_loop
 

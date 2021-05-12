@@ -48,7 +48,7 @@ class Board
         # debugger
         piece = self[start_pos]
         raise "no piece at position" if piece == NullPiece.instance
-        if piece.moves.include?(end_pos)
+        if piece.valid_moves.include?(end_pos)
             if piece.is_a?(King)
                 piece.color == "black" ? @black_king_pos = end_pos : @white_king_pos = end_pos
             end
@@ -57,7 +57,6 @@ class Board
             self[end_pos] = piece
             self[start_pos] = NullPiece.instance
         end
-        self.render
     end
 
     def [](pos)
@@ -116,8 +115,10 @@ class Board
 
 end
 
-# board = Board.new
-# p board[[0,0]].object_id
+p board = Board.new
+p board2 = board.deep_dup
+
+p board2[[1,5]].valid_moves   
 
 # puts "============================="
 
