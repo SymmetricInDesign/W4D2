@@ -30,7 +30,7 @@ class Game
             end
             swap_turn
         end
-        p "Game over. #{@current_player} loses!"
+        p "Game over. #{@current_player.color} loses!"
     end
 
 
