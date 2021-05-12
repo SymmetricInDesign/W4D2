@@ -14,7 +14,7 @@ class Board
         self.build_pawn_rows
         self.build_back_rows
 
-
+        self.render
     end
 
     def build_pawn_rows
@@ -42,14 +42,17 @@ class Board
     end
 
     def move_piece(start_pos, end_pos)
+
         # debugger
         piece = self[start_pos]
         raise "no piece at position" if piece == NullPiece.instance
         if piece.moves.include?(end_pos)
+            puts "moved from #{start_pos} to #{end_pos}"
             piece.pos = end_pos 
             self[end_pos] = piece
             self[start_pos] = NullPiece.instance
         end
+        self.render
     end
 
     def [](pos)
@@ -71,6 +74,7 @@ class Board
             end
             puts str
         end
+        puts "================="
     end
 
 end
@@ -86,9 +90,17 @@ queen = Queen.new("white", board, [3,3])
 # board.add_piece(knight1, knight1.pos)
 # board.add_piece(knight2, knight2.pos)
 # p queen.moves
-board.render
-puts "====================="
 
-board.move_piece([6,3], [5,5])
-board.render
+board.move_piece([1,3], [3,3])
+board.move_piece([6,7], [5,7])
+board.move_piece([0,2], [5,7])
+board.move_piece([5,7], [0,2])
+
+board.move_piece([0,3], [2,3])
+board.move_piece([7,7], [2,7])
+
+board.move_piece([1,6], [2,7])
+board.move_piece([0,4], [1,3])
+
+
 # board.render

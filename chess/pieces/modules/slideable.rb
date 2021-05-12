@@ -1,3 +1,5 @@
+# require "byebug"
+
 module Slideable
     
     DIAGNAL = [[1, 1], [-1, -1], [1, -1], [-1, 1]]
@@ -5,7 +7,6 @@ module Slideable
 
     def moves
         possible_moves = []
-
         dirs = self.move_dirs
         dirs.each do |dir|
             i,j = dir

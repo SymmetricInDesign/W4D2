@@ -1,7 +1,8 @@
 require_relative "../piece"
+require_relative "./modules/slideable"
 
 class Rook < Piece
-    
+    include Slideable
     def initialize(color, board, pos)
         super
     end
